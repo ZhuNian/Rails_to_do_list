@@ -1,13 +1,17 @@
 .container
   .row
+    .col-md-4
+      %a{"data-background-color" => "#990000", :href => "#"} Paint it red
+      %a{"data-background-color"=>"#009900", "data-text-color"=>"red", href:"#"} red text
+  .row
     =form_for(@toDo) do |f|
       =f.label :title
       =f.text_field :title
 
       =f.label :text
       =f.text_field :text
-
-      =f.submit "Add my to do list", class: "btn btn-primary"
+      .addToDoList
+        =f.submit "Add my to do list", class: "btn btn-primary"
 
   .row
     =render 'show_title'

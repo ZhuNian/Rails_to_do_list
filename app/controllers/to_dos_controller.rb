@@ -20,10 +20,20 @@ class ToDosController < ApplicationController
   def create
     @toDo = ToDo.new(user_params)
     @toDo.statue = false;
-    if @toDo.save
-      redirect_to to_dos_url
-    else
-      render 'index'
+    # if @toDo.save
+    #   redirect_to to_dos_url
+    # else
+    #   render 'index'
+    # end
+    respond_to do |format|
+      if @toDo.save
+        format.html{redirect_to to_dos_url}
+        format.js   {}
+        format.json { render json: @toDo }
+      else
+        format.html{render 'index'}
+        format.json { render json: @toDo.errors, status: :unprocessable_entity }
+      end
     end
   end
 
