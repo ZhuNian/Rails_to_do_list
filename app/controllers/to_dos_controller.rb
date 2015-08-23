@@ -19,15 +19,15 @@ class ToDosController < ApplicationController
 
   def create
     @toDo = ToDo.new(user_params)
-    binding.pry
+    @toDo.statue = false;
     if @toDo.save
-      render 'index'
+      redirect_to to_dos_url
     else
-      redirect_to to_dos_new_path
+      render 'index'
     end
   end
 
   def user_params
-    params.require(:to_do).permit(:title, :text, :statue)
+    params.require(:to_do).permit(:title, :text,)
   end
 end
