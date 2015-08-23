@@ -1,0 +1,8 @@
+.col-md-6
+  - toDo.each do |todo|
+    .row
+      .col-md-1.h1.small= todo.id
+      .col-md-1.h1.small= todo.title
+      .col-md-1.h1.small= todo.text
+      .col-md-1.checkbox
+      %input{:type => "checkbox",:class=>"status",:checked=>todo.statue}

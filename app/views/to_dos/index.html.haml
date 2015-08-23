@@ -1,0 +1,30 @@
+.container
+  .row
+    =form_for(@toDo) do |f|
+      =f.label :title
+      =f.text_field :title
+
+      =f.label :text
+      =f.text_field :text
+
+      =f.submit "Add my to do list", class: "btn btn-primary"
+
+  .row
+    =render 'show_title'
+    =render 'show_title'
+    .col-md-6.toDoTrueClass
+      - @toDoTrue.each do |todo|
+        .row.toDoTrue
+          .col-md-1.h1.small= todo.id
+          .col-md-1.h1.small= todo.title
+          .col-md-1.h1.small= todo.text
+          .col-md-1.checkbox
+          %input{:type => "checkbox",:class=>"status",:checked=>todo.statue}
+    .col-md-6.toDoFalseClass
+      - @toDoFalse.each do |todo|
+        .row.toDoFalse
+          .col-md-1.h1.small= todo.id
+          .col-md-1.h1.small= todo.title
+          .col-md-1.h1.small= todo.text
+          .col-md-1.checkbox
+          %input{:type => "checkbox",:class=>"status",:checked=>todo.statue}
