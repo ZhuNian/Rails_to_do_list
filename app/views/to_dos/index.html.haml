@@ -4,31 +4,20 @@
       %a{"data-background-color" => "#990000", :href => "#"} Paint it red
       %a{"data-background-color"=>"#009900", "data-text-color"=>"red", href:"#"} red text
   .row
-    =form_for(@toDo) do |f|
+    =form_for @toDo ,remote:true do |f|
       =f.label :title
       =f.text_field :title
 
       =f.label :text
       =f.text_field :text
-      .addToDoList
-        =f.submit "Add my to do list", class: "btn btn-primary"
+      =f.submit "Add my to do list", class: "btn btn-primary add_to_do"
 
   .row
     =render 'show_title'
     =render 'show_title'
     .col-md-6.toDoTrueClass
       - @toDoTrue.each do |todo|
-        .row.toDoTrue
-          .col-md-1.h1.small= todo.id
-          .col-md-1.h1.small= todo.title
-          .col-md-1.h1.small= todo.text
-          .col-md-1.checkbox
-          %input{:type => "checkbox",:class=>"status",:checked=>todo.statue}
+        =render 'show_list',toDo: todo
     .col-md-6.toDoFalseClass
       - @toDoFalse.each do |todo|
-        .row.toDoFalse
-          .col-md-1.h1.small= todo.id
-          .col-md-1.h1.small= todo.title
-          .col-md-1.h1.small= todo.text
-          .col-md-1.checkbox
-          %input{:type => "checkbox",:class=>"status",:checked=>todo.statue}
+        =render 'show_list',toDo: todo

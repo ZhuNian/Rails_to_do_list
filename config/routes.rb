@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   resources :to_dos
-  get 'to_dos/new'
+  # get 'to_dos' => 'to_dos#index'
 
-  get 'to_dos/edit'
-
-  get 'to_dos/show'
-
-  root 'to_dos#index'
+  get 'index' => 'to_dos#index'
+  # root 'to_dos#index'
+  post 'index'=>'to_dos#add'
+  post 'to_dos/change_status'=>'to_dos#change_status'
+  # post 'to_dos/add'=>'to_dos#add'
+  # post 'to_dos/show_list'=>'to_dos#add'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
