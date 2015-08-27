@@ -35,11 +35,22 @@ class ToDosController < ApplicationController
     render partial: '/to_dos/show_list' , locals: {toDo: to_do}
   end
 
+  def delete
+    to_do = ToDo.find(params[:id])
+    to_do.delete
+  end
+
   def change_status
     to_do = ToDo.find(user_id_params['id'])
     to_do.update(add_params)
     to_do.save
   end
+
+  def edit_to_do
+    title = params[:data][:title]
+    text = params[:data][:text]
+  end
+
   def user_params
     params.require(:to_do).permit(:title, :text,:statue)
   end
@@ -50,5 +61,9 @@ class ToDosController < ApplicationController
 
   def user_id_params
     params.require(:to_do).permit(:id,:statue)
+  end
+
+  def user_id
+    params.require(:to_do).permit(:id)
   end
 end

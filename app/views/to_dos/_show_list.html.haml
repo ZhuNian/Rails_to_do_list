@@ -1,6 +1,12 @@
 .row
   .col-md-1.h1.small.to_do_id= toDo.id
-  .col-md-1.h1.small= toDo.title
-  .col-md-1.h1.small= toDo.text
+  .col-md-1.h1.small.to_do_title= toDo.title
+  .col-md-2.h1.small.to_do_text= toDo.text
   .col-md-1.checkbox
-  %input{:type => "checkbox",:class=>"status",:checked=>toDo.statue}
+    %input{:type => "checkbox",:class=>"status",:checked=>toDo.statue}
+  .col-md-2
+    %input{:type => "button",value:"edit",class:"btn-primary edit-buttton"}
+  .col-md-1
+    %button.btn.btn-primary.delete-btn delete
+
+
