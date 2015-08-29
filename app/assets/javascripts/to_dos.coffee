@@ -25,24 +25,30 @@ $(document).ready ->
   $("#edit-form").dialog({
     modal: true
     autoOpen: false
-    buttons:{
-      "OK": =>
-        $.post("/to_dos/edit_to_do_list",
-          data:{
-            title:$("#title-input").val()
-            text:$("#text-input").val()
-          }
-        )
-        $("#edit-form").dialog( "close" )
-        $(this.parentElement.parentElement.getElementsByClassName("to_do_title")).text($("#title-input").val())
-        $(this.parentElement.parentElement.getElementsByClassName("to_do_text")).text($("#text-input").val())
-      "Cancel":=> $( "#edit-form" ).dialog( "close" )
-    }
   })
 
   $(".edit-buttton").click ->
-    $("#title-input").val($(this.parentElement.parentElement.getElementsByClassName("to_do_title")).text())
-    $("#text-input").val($(this.parentElement.parentElement.getElementsByClassName("to_do_text")).text())
+    title = $(this.parentElement.parentElement.getElementsByClassName("to_do_title"))
+    text = $(this.parentElement.parentElement.getElementsByClassName("to_do_text"))
+    id = $(this.parentElement.parentElement.getElementsByClassName("to_do_id"))
+    $("#title-input").val(title.text())
+    $("#text-input").val(text.text())
+    $("#edit-form").dialog('option',{
+      title: "编辑" ,
+      buttons:{
+        "OK": =>
+          $.post("/to_dos/edit_to_do_list",
+            data:{
+              id: id.text()
+              title:$("#title-input").val()
+              text:$("#text-input").val()
+            }
+          )
+          $("#edit-form").dialog( "close" )
+          title.text($("#title-input").val())
+          text.text($("#text-input").val())
+        "Cancel":=> $( "#edit-form" ).dialog( "close" )
+      }})
     $("#edit-form").dialog('open')
 
 

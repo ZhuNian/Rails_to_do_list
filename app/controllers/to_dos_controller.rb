@@ -47,8 +47,10 @@ class ToDosController < ApplicationController
   end
 
   def edit_to_do
-    title = params[:data][:title]
-    text = params[:data][:text]
+    title = edit_params[:title]
+    text = edit_params[:text]
+    to_do = ToDo.find(edit_params[:id])
+    to_do.update(title:title,text:text)
   end
 
   def user_params
@@ -65,5 +67,9 @@ class ToDosController < ApplicationController
 
   def user_id
     params.require(:to_do).permit(:id)
+  end
+
+  def edit_params
+    params.require(:data).permit(:id,:title,:text)
   end
 end
