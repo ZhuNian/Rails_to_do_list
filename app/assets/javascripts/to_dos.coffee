@@ -20,6 +20,14 @@ $(document).ready ->
       (data) =>
         console.log("data")
         $(".toDoFalseClass").append(data)
+        $(".status").change ->
+          if this.checked == false
+            $(".toDoFalseClass").append(this.parentElement.parentElement)
+          else
+            $(".toDoTrueClass").append(this.parentElement.parentElement)
+          $.post("/to_dos/change_status"
+            to_do:{id:$(this.parentElement.parentElement.getElementsByClassName("to_do_id")).text(),statue:this.checked}
+      )
     )
 
   $("#edit-form").dialog({
